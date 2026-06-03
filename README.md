@@ -37,7 +37,7 @@ Use it to **deduplicate** sign-ups, **prevent** disposable/aliased re-registrati
 ## Installation
 
 ```bash
-npm install nomadic
+npm install @grml/nomadic
 ```
 
 `nomadic` ships as ESM (`"type": "module"`). It runs in modern browsers and in Node 18+, and has no runtime dependencies.
@@ -45,7 +45,7 @@ npm install nomadic
 ## Quick start
 
 ```ts
-import { normalizeEmail, isSameEmail, getEmailProvider } from "nomadic";
+import { normalizeEmail, isSameEmail, getEmailProvider } from "@grml/nomadic";
 
 normalizeEmail("John.Doe+newsletter@googlemail.com"); // "johndoe@gmail.com"
 normalizeEmail("John.Doe+news@outlook.com");          // "john.doe@outlook.com" (dots kept)
@@ -120,7 +120,7 @@ getEmailProvider("a@example.com"); // null
 The read-only array of built-in [`ProviderRule`](#options-reference) objects, exported so you can inspect or build on top of it.
 
 ```ts
-import { DEFAULT_PROVIDERS } from "nomadic";
+import { DEFAULT_PROVIDERS } from "@grml/nomadic";
 DEFAULT_PROVIDERS.flatMap((p) => p.domains); // every recognized domain
 ```
 
@@ -158,7 +158,7 @@ All built-in providers lowercase the local part (they are case-insensitive in pr
 Pass extra rules via `providers`. They are matched by domain and take precedence over the built-ins.
 
 ```ts
-import { normalizeEmail, type ProviderRule } from "nomadic";
+import { normalizeEmail, type ProviderRule } from "@grml/nomadic";
 
 const corporate: ProviderRule = {
   id: "corp",
@@ -237,7 +237,7 @@ interface ProviderRule {
 **Deduplicate a list of addresses**
 
 ```ts
-import { normalizeEmail } from "nomadic";
+import { normalizeEmail } from "@grml/nomadic";
 
 const unique = [...new Map(
   rawEmails.map((e) => [normalizeEmail(e), e]),
@@ -247,7 +247,7 @@ const unique = [...new Map(
 **Block re-registration with an aliased address**
 
 ```ts
-import { isSameEmail } from "nomadic";
+import { isSameEmail } from "@grml/nomadic";
 
 const alreadyUsed = existingUsers.some((u) => isSameEmail(u.email, signup.email));
 ```
