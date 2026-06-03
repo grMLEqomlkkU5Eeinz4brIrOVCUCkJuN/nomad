@@ -1,9 +1,9 @@
 /**
- * nomad: provider-aware email normalization and canonicalization.
+ * nomadic: provider-aware email normalization and canonicalization.
  *
  * @example
  * ```ts
- * import { normalizeEmail, isSameEmail } from "nomad";
+ * import { normalizeEmail, isSameEmail } from "nomadic";
  *
  * normalizeEmail("John.Doe+newsletter@googlemail.com"); // "johndoe@gmail.com"
  * isSameEmail("a.b@gmail.com", "ab@gmail.com");          // true

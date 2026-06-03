@@ -1,8 +1,8 @@
-# nomad
+# nomadic
 
 Provider-aware **email normalization and canonicalization** for the browser and the server. Pure ESM, zero runtime dependencies, fully typed.
 
-Two addresses can point to the same mailbox even when they look different. `John.Doe+news@googlemail.com` and `johndoe@gmail.com` both deliver to the same Gmail inbox. `nomad` resolves any address to a single **canonical form** using per-provider rules, and lets you configure rules for your own providers.
+Two addresses can point to the same mailbox even when they look different. `John.Doe+news@googlemail.com` and `johndoe@gmail.com` both deliver to the same Gmail inbox. `nomadic` resolves any address to a single **canonical form** using per-provider rules, and lets you configure rules for your own providers.
 
 Use it to **deduplicate** sign-ups, **prevent** disposable/aliased re-registration, **compare** addresses for equality, or simply **clean** user input.
 
@@ -37,15 +37,15 @@ Use it to **deduplicate** sign-ups, **prevent** disposable/aliased re-registrati
 ## Installation
 
 ```bash
-npm install nomad
+npm install nomadic
 ```
 
-`nomad` ships as ESM (`"type": "module"`). It runs in modern browsers and in Node 18+, and has no runtime dependencies.
+`nomadic` ships as ESM (`"type": "module"`). It runs in modern browsers and in Node 18+, and has no runtime dependencies.
 
 ## Quick start
 
 ```ts
-import { normalizeEmail, isSameEmail, getEmailProvider } from "nomad";
+import { normalizeEmail, isSameEmail, getEmailProvider } from "nomadic";
 
 normalizeEmail("John.Doe+newsletter@googlemail.com"); // "johndoe@gmail.com"
 normalizeEmail("John.Doe+news@outlook.com");          // "john.doe@outlook.com" (dots kept)
@@ -67,7 +67,7 @@ Mail providers apply their own rules to decide which mailbox an address reaches:
 | **Alias domains** (Gmail)      | `you@googlemail.com` -> `you@gmail.com`              | yes           |
 | **Case-insensitivity**         | `You@gmail.com` -> `you@gmail.com`                   | yes           |
 
-`nomad` applies the right rules for each provider and returns one canonical string, so equal mailboxes compare equal.
+`nomadic` applies the right rules for each provider and returns one canonical string, so equal mailboxes compare equal.
 
 ## API reference
 
@@ -120,7 +120,7 @@ getEmailProvider("a@example.com"); // null
 The read-only array of built-in [`ProviderRule`](#options-reference) objects, exported so you can inspect or build on top of it.
 
 ```ts
-import { DEFAULT_PROVIDERS } from "nomad";
+import { DEFAULT_PROVIDERS } from "nomadic";
 DEFAULT_PROVIDERS.flatMap((p) => p.domains); // every recognized domain
 ```
 
@@ -158,7 +158,7 @@ All built-in providers lowercase the local part (they are case-insensitive in pr
 Pass extra rules via `providers`. They are matched by domain and take precedence over the built-ins.
 
 ```ts
-import { normalizeEmail, type ProviderRule } from "nomad";
+import { normalizeEmail, type ProviderRule } from "nomadic";
 
 const corporate: ProviderRule = {
   id: "corp",
@@ -237,7 +237,7 @@ interface ProviderRule {
 **Deduplicate a list of addresses**
 
 ```ts
-import { normalizeEmail } from "nomad";
+import { normalizeEmail } from "nomadic";
 
 const unique = [...new Map(
   rawEmails.map((e) => [normalizeEmail(e), e]),
@@ -247,7 +247,7 @@ const unique = [...new Map(
 **Block re-registration with an aliased address**
 
 ```ts
-import { isSameEmail } from "nomad";
+import { isSameEmail } from "nomadic";
 
 const alreadyUsed = existingUsers.some((u) => isSameEmail(u.email, signup.email));
 ```
