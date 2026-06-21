@@ -29,7 +29,7 @@
 		"url": "git+https://github.com/grMLEqomlkkU5Eeinz4brIrOVCUCkJuN/nomad.git"
 	},
 	"devDependencies": {
-		"@types/node": "^25.0.3",
+		"@types/node": "^26.0.0",
 		"eslint": "^10.1.0",
 		"tsup": "^8.5.0",
 		"typescript": "^6.0.2"
